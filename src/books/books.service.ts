@@ -9,24 +9,24 @@ export class BooksService {
   constructor(private prisma: PrismaService) {}
 
   async createBook(data: CreateBookInput) {
-    await this.prisma.book.create({ data });
+    return await this.prisma.book.create({ data });
   }
 
   async getAllBooks() {
-    await this.prisma.book.findMany({});
+    return await this.prisma.book.findMany({});
   }
 
   async getBookById(id: number) {
-    await this.prisma.book.findUnique({
+    return await this.prisma.book.findUnique({
       where: { id },
     });
   }
 
   async updateBook(id: number, data: UpdateBookInput) {
-    await this.prisma.book.update({ where: { id }, data });
+    return await this.prisma.book.update({ where: { id }, data });
   }
 
   async deleteBook(id: number) {
-    await this.prisma.book.delete({ where: { id } });
+    return await this.prisma.book.delete({ where: { id } });
   }
 }
