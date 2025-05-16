@@ -10,7 +10,7 @@ export class BooksResolver {
   constructor(private bookService: BooksService) {}
 
   @Query(() => [Book])
-  getAllBooks() {
+  getAllBooks(): Promise<Books[]> {
     return this.bookService.getAllBooks();
   }
 
@@ -20,7 +20,7 @@ export class BooksResolver {
   }
 
   @Mutation(() => Book)
-  createBook(@Args('input') input: CreateBookInput) {
+  createBook(@Args('input') input: CreateBookInput): Promise<Books> {
     return this.bookService.createBook(input);
   }
 
@@ -28,12 +28,12 @@ export class BooksResolver {
   updateBook(
     @Args('id', { type: () => Int }) id: number,
     @Args('input') input: UpdateBookInput,
-  ) {
+  ): Promise<Books> {
     return this.bookService.updateBook(id, input);
   }
 
   @Mutation(() => Book)
-  deleteBook(@Args('id', { type: () => Int }) id: number) {
+  deleteBook(@Args('id', { type: () => Int }) id: number): Promise<Books> {
     return this.bookService.deleteBook(id);
   }
 }
